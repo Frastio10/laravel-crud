@@ -22,3 +22,5 @@ Route::post('/', 'UsersController@store');
 Route::patch('/', 'UsersController@update');
 
 Route::get('/delete/{user}','UsersController@destroy')->name('user.delete');
+
+Route::get('/search','UsersController@search');

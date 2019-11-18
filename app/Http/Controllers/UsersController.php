@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -112,5 +113,20 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect('/');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $users = DB::table('users')
+                    ->where('name', 'like','%'.$search.'%')
+                    ->orWhere('email', 'like','%'.$search.'%')
+                    ->orWhere('address', 'like','%'.$search.'%')
+                    ->orWhere('address', 'like','%'.$search.'%')
+                    ->orWhere('born', 'like','%'.$search.'%')
+                    ->orWhere('hobby', 'like','%'.$search.'%')      
+                    
+                    ->get();
+        return view('index',compact('users'));
     }
 }

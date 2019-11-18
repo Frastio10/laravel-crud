@@ -1,11 +1,21 @@
 @extends("layouts.main")
 
+@section("title","User Data")
+
 @section("content")
 
 <div class="container">
 	<div class="row pt-5">
-		<a href="/create" class="btn btn-primary mb-3">Create Data</a>
-		<table class="table border">
+		<div class="input-group float-right">
+			  <h3 class="float-left">User's Data</h3>
+
+			 <form class="form-inline my-2 my-lg-0 ml-auto" method="get" action="/search">
+		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		      <a href="/create" class="btn btn-primary ml-2">Create Data</a>
+		    </form>
+		</div>
+		<table class="table border mt-3">
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">#</th>
