@@ -27,26 +27,35 @@
 			<h1>Create Data</h1>
 			<form method="post" action="/">
 				@csrf
+			  @if ($errors->any())
+			  	<div class="alert alert-danger">
+			  		<ul>
+			  			@foreach ($errors->all() as $error)
+			  				<li>{{ $error }}</li>
+			  			@endforeach
+			  		</ul>
+			  	</div>
+			  @endif
 			  <div class="form-row">
 			  	<div class="form-group col-md-6">
 			      <label for="inputName">Name</label>
-			      <input type="text" class="form-control" id="inputName" placeholder="Name" name="name">
+			      <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{ old('name') }}">
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label for="inputEmail4">Email</label>
-			      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+			      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" value="{{ old('email') }}">
 			    </div>
 			    <div class="form-group col-md-3">
 			      <label for="inputAge">Age</label>
-			      <input type="number" class="form-control" id="inputAge" placeholder="Age" name="age">
+			      <input type="number" class="form-control" id="inputAge" placeholder="Age" name="age" value="{{ old('age') }}">
 			    </div>
 			     <div class="form-group col-md-6">
 			      <label for="inputBorn">Born</label>
-			      <input type="text" class="form-control" id="inputBorn" placeholder="Born" name="born">
+			      <input type="date" class="form-control" id="inputBorn" placeholder="Born" name="born" value="{{ old('born') }}">
 			    </div>
 			     <div class="form-group col-md-3">
 			      <label for="inputHobby">Hobby</label>
-			      <input type="text" class="form-control" id="inputHobby" placeholder="Hobby" name="hobby">
+			      <input type="text" class="form-control" id="inputHobby" placeholder="Hobby" name="hobby" value="{{ old('hobby') }}">
 			    </div>
 			    <div class="form-group col-md-12">
 			      <label for="inputPassword4">Password</label>
@@ -55,7 +64,7 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="inputAddress">Address</label>
-			    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="address">
+			    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="address" value="{{ old('address') }}">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Create</button>
 			  <a href="/">Back</a>

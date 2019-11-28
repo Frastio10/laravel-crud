@@ -26,6 +26,7 @@
 		      <th scope="col">Age</th>	
 		      <th scope="col">Born</th>	
 		      <th scope="col">Hobby</th>	
+		      <th scope="col">Images</th>	
 		      <th scope="col">Action</th>	
 		    </tr>
 		  </thead>
@@ -41,13 +42,18 @@
 			      <td>{{ $user->born }}</td>	
 			      <td>{{ $user->hobby }}</td>
 			      <td>
+			      	<img src="{{ asset('assets/images/userprofile-1.jpg') }}" class="user-image" alt="">
+			      </td>
+			      <td>
 			      	<a href="/user/{{ $user->id }}/edit" class="badge badge-primary">Edit</a>
 			       	<a  href="{{ route('user.delete',  $user->id) }}" class="badge badge-danger">Delete</a>
-			    </td>
+			      </td>
+			     
 			    </tr>
 			@endforeach
 		  </tbody>
 		</table>
+		{{ $users->links() }}
 	</div>
 </div>
 

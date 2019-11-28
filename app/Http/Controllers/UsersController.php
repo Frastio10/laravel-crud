@@ -15,7 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-       $users = \App\User::all();
+       $users = User::paginate(10);
+
 
        return view('index', compact('users'));
     }
@@ -38,17 +39,25 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
+        
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'age' => 'required|numeric',
+            'born' => 'required|date',
+            'address' => 'required',
+            'password' => 'required'
+        ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->age = $request->age;
-        $user->born = $request->born;
-        $user->hobby = $request->hobby;
-        $user->address = $request->address;
-        $user->password = $request->password;
-
-        $user->save();
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'age' => $request->age,
+            'born' => $request->born,
+            'hobby' => $request->hobby,
+            'address' => $request->address,
+            'password' => $request->password
+        ]);
 
         return redirect('/');
     }
@@ -84,7 +93,7 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
-        $user = \App\User::findOrFail($request->id);
+        $user = User::findOrFail($request->id);
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -109,7 +118,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user =  \App\User::findOrFail($user->id);
+        $user =  User::findOrFail($user->id);
         $user->delete();
 
         return redirect('/');
@@ -118,8 +127,7 @@ class UsersController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $users = DB::table('users')
-                    ->where('name', 'like','%'.$search.'%')
+        $users = User::where('name', 'like','%'.$search.'%')
                     ->orWhere('email', 'like','%'.$search.'%')
                     ->orWhere('address', 'like','%'.$search.'%')
                     ->orWhere('address', 'like','%'.$search.'%')
