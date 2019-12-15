@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UsersController extends Controller
 {
@@ -39,6 +41,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $path = $request->image->store('avatars','public');
         
         $validate = $request->validate([
             'name' => 'required',
@@ -56,8 +59,14 @@ class UsersController extends Controller
             'born' => $request->born,
             'hobby' => $request->hobby,
             'address' => $request->address,
-            'password' => $request->password
+            'password' => $request->password,
+            'image' => $path
         ]);
+
+
+        
+
+       
 
         return redirect('/');
     }
@@ -93,6 +102,8 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
+        $path = $request->image->store('avatars','public');
+
         $user = User::findOrFail($request->id);
 
         $user->name = $request->name;
@@ -102,6 +113,7 @@ class UsersController extends Controller
         $user->hobby = $request->hobby;
         $user->password = $request->password;
         $user->address = $request->address;
+        $user->image = $path;
 
         $user->save();
 
@@ -135,6 +147,7 @@ class UsersController extends Controller
                     ->orWhere('hobby', 'like','%'.$search.'%')      
                     
                     ->get();
+
         return view('index',compact('users'));
     }
 }

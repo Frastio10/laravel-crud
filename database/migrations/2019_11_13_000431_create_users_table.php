@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('age');
             $table->date('born');
             $table->string('hobby');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

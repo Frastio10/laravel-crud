@@ -25,7 +25,7 @@
 	<div class="row form-wrapper">
 		<div class="col-md-5 mx-auto">
 			<h2>Edit Data</h2>
-			<form method="post" action="/" class="mt-3">
+			<form method="post" action="/" class="mt-3" enctype="multipart/form-data">
 				@csrf
 				@method("patch")
 				<input type="hidden" name="id"  value="{{ $user->id }}" >
@@ -55,6 +55,10 @@
 			      <label for="inputPassword4">Password</label>
 			      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password" value="{{ $user->password }}">
 			    </div>
+			  </div>
+			  <div class="form-group d-flex flex-column">
+			  	<label for="image">Profile Image</label>
+			  	<input type="file" name="image" id="">
 			  </div>
 			  <div class="form-group">
 			    <label for="inputAddress">Address</label>

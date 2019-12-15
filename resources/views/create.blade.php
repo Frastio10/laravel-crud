@@ -25,7 +25,7 @@
 	<div class="row form-wrapper">
 		<div class="col-md-5 mx-auto">
 			<h1>Create Data</h1>
-			<form method="post" action="/">
+			<form method="post" action="/" enctype="multipart/form-data">
 				@csrf
 			  @if ($errors->any())
 			  	<div class="alert alert-danger">
@@ -61,6 +61,10 @@
 			      <label for="inputPassword4">Password</label>
 			      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password">
 			    </div>
+			  </div>
+			  <div class="form-group d-flex flex-column">
+			  	<label for="image">Profile Image</label>
+			  	<input type="file" name="image" id="">
 			  </div>
 			  <div class="form-group">
 			    <label for="inputAddress">Address</label>

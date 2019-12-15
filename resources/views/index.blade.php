@@ -42,7 +42,7 @@
 			      <td>{{ $user->born }}</td>	
 			      <td>{{ $user->hobby }}</td>
 			      <td>
-			      	<img src="{{ asset('assets/images/userprofile-1.jpg') }}" class="user-image" alt="">
+			      	<img src="{{ asset('storage/storage/'.$user->image) }}" class="user-image" alt="">
 			      </td>
 			      <td>
 			      	<a href="/user/{{ $user->id }}/edit" class="badge badge-primary">Edit</a>
